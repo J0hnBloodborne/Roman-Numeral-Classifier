@@ -1,47 +1,87 @@
-# Ai202L-Project
+# Roman Numeral Classifier (I–X)
 
-### 🏛️ Roman Numeral Classifier (I–X)
-This Flask web app lets you upload or draw a Roman numeral (I to X), and it'll predict the value using a trained neural network model. It uses a main CNN classifier and a binary subnet model to fix common confusion between 'II' and 'V'.
+This Flask-based web application, & has a pyqt app also, allows users to upload or draw images of Roman 
+numerals ranging from I to X. The system classifies the input using a convolutional neural network (CNN) model. 
+To improve accuracy, a binary subnet classifier is used to resolve frequent confusion between similar numerals.
 
-### ✨ How It Works
-#### 🧠 Main Model (Except2.keras)
-A CNN trained to classify handwritten Roman numerals I to X.
+---
 
-Output: 10-class softmax (I, II, III, IV, V, VI, VII, VIII, IX, X).
+## Overview
 
-Input: 28×28 grayscale image (preprocessed and centered).
+### Main Model:
 
-Architecture: basic Conv2D + MaxPooling + Dense layers.
+A convolutional neural network trained to classify handwritten Roman numerals from I to X.
 
-⚠️ Known Issue
-'II' is always predicted as 'V'.
+- **Input:** 28×28 grayscale images (centered and normalized)
+- **Output:** 10-class softmax prediction:  
+  `I, II, III, IV, V, VI, VII, VIII, IX, X`
+- **Architecture:** Sequential CNN with Conv2D, MaxPooling, Dense layers
+- **Loss Function:** Categorical crossentropy
+- **Optimizer:** Adam
 
-#### 🧩 Subnet Model (2-5-9th.keras)
-A binary classifier to distinguish between 'II' and 'V' more precisely.
+**Known Issue:**  
+The model frequently misclassifies 'II' as 'V'.
 
-Activated only when main model predicts 'V'.
+---
 
-Output: sigmoid → 1 = 'II', 0 = 'V'.
+### Subnet Model:
 
-Architecture: small CNN (Conv2D + Dense + Dropout).
+A binary CNN model trained specifically to distinguish between 'II' and 'V'.
 
-#### 🔁 Preprocessing
-Base64 input → grayscale PIL image.
+- **Trigger Condition:** Activated only when the main model predicts 'V'
+- **Output:**  
+  - 1 → 'II'  
+  - 0 → 'V'
+- **Architecture:** Shallow CNN with Conv2D, MaxPooling, Dropout, Dense
+- **Loss Function:** Binary crossentropy
+- **Optimizer:** Adam
 
-Crops whitespaces for main model.
+This auxiliary model enhances prediction accuracy for visually ambiguous cases.
 
-Resizes to 28×28.
+---
 
-Normalized to [0, 1].
+## Preprocessing Pipeline
 
-Optional augmentation (e.g., flip or rotate for subnet).
+- Input is captured via file upload or canvas (base64)
+- Converted to grayscale using PIL
+- Cropped to remove surrounding white space
+- Resized to 28×28 pixels
+- Pixel values normalized to the range [0, 1]
+- Optional data augmentation for the subnet (e.g., rotation, shear)
 
-#### 🧪 Model Training (TL;DR)
-Trained on a synthetic + real dataset of handwritten numerals.
+---
 
-Main model: categorical crossentropy.
+## Training Summary
 
-Subnet: binary crossentropy.
+### Main Model
+- Trained using a combination of real and synthetic handwritten data
+- Augmentations included:
+  - Rotation
+  - Width and height shifting
+  - Zoom
 
-Augmentation: flipping, rotation (optional).
+### Subnet Model
+- Trained on targeted examples of 'II' and 'V'
+- Used to refine predictions when the main model is uncertain
+- Augmentations included:
+  - Rotation
+  - Shear
+  - Translation
 
+---
+
+## Deployment
+
+The application runs as a Flask web server, where users can:
+
+- Upload an image of a Roman numeral
+- Draw directly on a canvas
+- View the predicted numeral with visual feedback
+
+---
+
+## Future Improvements
+
+- Expand classification range beyond 'X'
+- Improve augmentation strategies
+- Explore ensemble methods for better confidence estimation
