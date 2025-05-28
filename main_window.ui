@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>100</x>
+    <y>100</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Roman Numeral Predictor</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="titleLabel">
+      <property name="text">
+       <string>Roman Numeral Predictor</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="styleSheet">
+       <string>font-size: 24px; font-weight: bold; margin: 16px;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="instructionsLabel">
+      <property name="text">
+       <string>Draw a Roman numeral (I-X) or upload an image below.</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="styleSheet">
+       <string>background: #f8f9fa; border-radius: 12px; padding: 8px; font-size: 14px;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <item>
+       <widget class="QPushButton" name="clearButton">
+        <property name="text">
+         <string>Clear Canvas</string>
+        </property>
+        <property name="styleSheet">
+         <string>border-radius: 8px; background: #43b04a; color: white; padding: 8px 24px; font-weight: bold;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="predictButton">
+        <property name="text">
+         <string>Predict</string>
+        </property>
+        <property name="styleSheet">
+         <string>border-radius: 8px; background: #43b04a; color: white; padding: 8px 24px; font-weight: bold;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="canvasLabel">
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>300</width>
+        <height>300</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string>background: white; border: 2px solid #bbb; border-radius: 16px; margin: 12px;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="resultLabel">
+      <property name="text">
+       <string>Prediction: </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="styleSheet">
+       <string>font-size: 18px; margin-top: 16px;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="uploadLayout">
+      <item>
+       <widget class="QPushButton" name="uploadButton">
+        <property name="text">
+         <string>Upload and Predict</string>
+        </property>
+        <property name="styleSheet">
+         <string>border-radius: 8px; background: #43b04a; color: white; padding: 8px 24px; font-weight: bold;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <statusbar/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
